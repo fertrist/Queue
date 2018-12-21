@@ -1,6 +1,7 @@
 package queue.impl;
 
 import queue.impl.array.DynamicSizeArrayQueue;
+import queue.impl.array.FixedSizeArrayQueue;
 import queue.impl.node.NodeQueue;
 
 import static java.lang.System.currentTimeMillis;
@@ -9,8 +10,11 @@ public class Test {
 
     public static void main(String[] args)
     {
-        //testQueue(new FixedSizeArrayQueue());
-        //testQueue(new DynamicSizeArrayQueue(64));
+        System.out.println("Fixed size");
+        testQueue(new FixedSizeArrayQueue());
+        System.out.println("Dynamic size");
+        testQueue(new DynamicSizeArrayQueue(64));
+        System.out.println("Node");
         testQueue(new NodeQueue());
     }
 
@@ -18,7 +22,7 @@ public class Test {
     {
         long startT = currentTimeMillis();
 
-        int numberOfElements = 1000;
+        int numberOfElements = 100000;
         for (int i = 0; i < numberOfElements; i++) {
             queue.add(i);
         }

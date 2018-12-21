@@ -24,8 +24,13 @@ public class NodeQueue implements Queue {
             throw new NoSuchElementException();
         }
         int element = front.getData();
-        front = front.getNext();
-        front.setPrev(null);
+        if (front == rear) {
+            front = null;
+            rear = null;
+        }
+        else {
+            front = front.getNext();
+        }
         size--;
         return element;
     }
@@ -49,18 +54,22 @@ public class NodeQueue implements Queue {
         else {
             addElement(element);
         }
-        size++;
     }
 
     private void addFirst(int element) {
         rear = new Node(element);
         front = rear;
+        size++;
     }
 
     private void addElement(int element) {
         Node oldRear = rear;
+        if (front == null) {
+            front = oldRear;
+        }
         rear = new Node(element);
         oldRear.setNext(rear);
         rear.setPrev(oldRear);
+        size++;
     }
 }
